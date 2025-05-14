@@ -1,35 +1,50 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [tarefas, setTarefas] = React.useState([]);
+  const [input, setInput] = React.useState('');
+  const inputElement = React.useRef();
+
+  function adicionarTarefa() {
+    const tarefaExistente = tarefas.find(
+      (tarefa) => tarefa.toLowerCase() === input.toLowerCase()
+    );
+
+    if (input.trim() && !tarefaExistente) {
+      setTarefas([...tarefas, input]);
+      setInput('');
+      inputElement.current.focus();
+    }
+  }
+
+  function teclouEnter({ key }) {
+    if (key === 'Enter') {
+      adicionarTarefa();
+    }
+  }
+
+  function handleChange({ target }) {
+    setInput(target.value);
+  }
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div>
+      <input
+        type="text"
+        value={input}
+        ref={inputElement}
+        onChange={handleChange}
+        onKeyDown={teclouEnter}
+      />
+      <button onClick={adicionarTarefa}>Adicionar Tarefa</button>
 
-export default App
+      <ul>
+        {tarefas.map((tarefa) => (
+          <li key={tarefa}>{tarefa}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default App;
