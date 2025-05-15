@@ -17,6 +17,14 @@ const App = () => {
     }
   }
 
+  function deletarTarefa({ target }) {
+    const nomeTarefaSelecionada = target.parentElement.dataset.nome;
+    const novasTarefas = tarefas.filter(
+      (tarefa) => tarefa.nome !== nomeTarefaSelecionada
+    );
+    setTarefas(novasTarefas);
+  }
+
   function teclouEnter({ key }) {
     if (key === 'Enter') {
       adicionarTarefa();
@@ -56,7 +64,10 @@ const App = () => {
         {tarefas.map((tarefa) => (
           <li
             key={tarefa.nome}
-            style={tarefa.isConcluida ? { textDecoration: 'line-through' } : null}
+            data-nome={tarefa.nome}
+            style={
+              tarefa.isConcluida ? { textDecoration: 'line-through' } : null
+            }
           >
             <input
               type="checkbox"
@@ -64,7 +75,10 @@ const App = () => {
               checked={tarefa.isConcluida}
               onChange={handleCheckboxChange}
             />
+
             {tarefa.nome}
+
+            <button onClick={deletarTarefa}>Delete</button>
           </li>
         ))}
       </ul>
