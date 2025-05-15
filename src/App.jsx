@@ -28,11 +28,11 @@ const App = () => {
   }
 
   function handleCheckboxChange({ target }) {
-    const tarefaSelecionada = target.name;
+    const nomeTarefaSelecionada = target.name;
 
     const novasTarefas = tarefas.map((tarefa) => {
-      if (tarefaSelecionada === tarefa.nome) {
-        return { nome: tarefa.nome, isConcluida: !tarefa.isConcluida };
+      if (nomeTarefaSelecionada === tarefa.nome) {
+        return { ...tarefa, isConcluida: !tarefa.isConcluida };
       } else {
         return tarefa;
       }
@@ -54,7 +54,10 @@ const App = () => {
 
       <ul>
         {tarefas.map((tarefa) => (
-          <li key={tarefa.nome}>
+          <li
+            key={tarefa.nome}
+            style={tarefa.isConcluida ? { textDecoration: 'line-through' } : null}
+          >
             <input
               type="checkbox"
               name={tarefa.nome}
