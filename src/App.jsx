@@ -7,11 +7,11 @@ const App = () => {
 
   function adicionarTarefa() {
     const tarefaExistente = tarefas.find(
-      (tarefa) => tarefa.toLowerCase() === input.toLowerCase()
+      (tarefa) => tarefa.nome.toLowerCase() === input.toLowerCase()
     );
 
     if (input.trim() && !tarefaExistente) {
-      setTarefas([...tarefas, input]);
+      setTarefas([...tarefas, { nome: input, isConcluida: false }]);
       setInput('');
       inputElement.current.focus();
     }
@@ -27,6 +27,20 @@ const App = () => {
     setInput(target.value);
   }
 
+  function handleCheckboxChange({ target }) {
+    const tarefaSelecionada = target.name;
+
+    const novasTarefas = tarefas.map((tarefa) => {
+      if (tarefaSelecionada === tarefa.nome) {
+        return { nome: tarefa.nome, isConcluida: !tarefa.isConcluida };
+      } else {
+        return tarefa;
+      }
+    });
+
+    setTarefas(novasTarefas);
+  }
+
   return (
     <div>
       <input
@@ -40,7 +54,15 @@ const App = () => {
 
       <ul>
         {tarefas.map((tarefa) => (
-          <li key={tarefa}>{tarefa}</li>
+          <li key={tarefa.nome}>
+            <input
+              type="checkbox"
+              name={tarefa.nome}
+              checked={tarefa.isConcluida}
+              onChange={handleCheckboxChange}
+            />
+            {tarefa.nome}
+          </li>
         ))}
       </ul>
     </div>
