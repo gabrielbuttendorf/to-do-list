@@ -29,6 +29,7 @@ const App = () => {
 
   function removerTodasTarefas() {
     setTarefas([]);
+    localStorage.removeItem('tarefas');
   }
 
   function handlePressEnter({ key }) {
@@ -54,6 +55,20 @@ const App = () => {
 
     setTarefas(novasTarefas);
   }
+
+  React.useEffect(() => {
+    if (tarefas.length) {
+      localStorage.setItem('tarefas', JSON.stringify(tarefas));
+    }
+  }, [tarefas]);
+
+  React.useEffect(() => {
+    const tarefaLocalStorage = localStorage.getItem('tarefas');
+
+    if (tarefaLocalStorage) {
+      setTarefas(JSON.parse(tarefaLocalStorage));
+    }
+  }, []);
 
   return (
     <div>
