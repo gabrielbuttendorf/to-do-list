@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FormularioTarefa = ({ input, inputRef, onChange, onEnter, onAdicionar }) => {
+const FormularioTarefa = ({ input, inputRef, onChange, onEnter, onAdicionar, onRemover }) => {
   return (
     <div>
       <input
@@ -11,6 +11,7 @@ const FormularioTarefa = ({ input, inputRef, onChange, onEnter, onAdicionar }) =
         onKeyDown={onEnter}
       />
       <button onClick={onAdicionar}>Adicionar Tarefa</button>
+      <button onClick={onRemover}>Remover todas as Tarefas</button>
     </div>
   );
 };

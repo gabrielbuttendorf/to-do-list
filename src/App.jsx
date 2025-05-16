@@ -27,6 +27,10 @@ const App = () => {
     setTarefas(novasTarefas);
   }
 
+  function removerTodasTarefas() {
+    setTarefas([]);
+  }
+
   function handlePressEnter({ key }) {
     if (key === 'Enter') {
       adicionarTarefa();
@@ -59,6 +63,7 @@ const App = () => {
         onChange={handleChange}
         onEnter={handlePressEnter}
         onAdicionar={adicionarTarefa}
+        onRemover={removerTodasTarefas}
       />
 
       <ul>
