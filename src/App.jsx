@@ -1,4 +1,6 @@
 import React from 'react';
+import TarefaItem from './TarefaItem';
+import FormularioTarefa from './FormularioTarefa';
 
 const App = () => {
   const [tarefas, setTarefas] = React.useState([]);
@@ -25,7 +27,7 @@ const App = () => {
     setTarefas(novasTarefas);
   }
 
-  function teclouEnter({ key }) {
+  function handlePressEnter({ key }) {
     if (key === 'Enter') {
       adicionarTarefa();
     }
@@ -51,35 +53,22 @@ const App = () => {
 
   return (
     <div>
-      <input
-        type="text"
-        value={input}
-        ref={inputElement}
+      <FormularioTarefa
+        input={input}
+        inputRef={inputElement}
         onChange={handleChange}
-        onKeyDown={teclouEnter}
+        onEnter={handlePressEnter}
+        onAdicionar={adicionarTarefa}
       />
-      <button onClick={adicionarTarefa}>Adicionar Tarefa</button>
 
       <ul>
         {tarefas.map((tarefa) => (
-          <li
+          <TarefaItem
             key={tarefa.nome}
-            data-nome={tarefa.nome}
-            style={
-              tarefa.isConcluida ? { textDecoration: 'line-through' } : null
-            }
-          >
-            <input
-              type="checkbox"
-              name={tarefa.nome}
-              checked={tarefa.isConcluida}
-              onChange={handleCheckboxChange}
-            />
-
-            {tarefa.nome}
-
-            <button onClick={deletarTarefa}>Delete</button>
-          </li>
+            tarefa={tarefa}
+            onCheck={handleCheckboxChange}
+            onDeletar={deletarTarefa}
+          />
         ))}
       </ul>
     </div>
