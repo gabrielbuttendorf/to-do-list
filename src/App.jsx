@@ -61,6 +61,15 @@ const App = () => {
     setTarefas(novasTarefas);
   }
 
+  function atualizaStatusTarefa(statusNovo) {
+    const novasTarefas = tarefas.map((tarefa) => ({
+      ...tarefa,
+      isConcluida: statusNovo,
+    }));
+
+    setTarefas(novasTarefas);
+  }
+
   React.useEffect(() => {
     if (tarefas.length) {
       localStorage.setItem('tarefas', JSON.stringify(tarefas));
@@ -101,6 +110,8 @@ const App = () => {
       </ul>
 
       <p>Tarefas pendentes: {tarefasPendentes}</p>
+      <button onClick={() => atualizaStatusTarefa(true)}>Todas concluídas</button>
+      <button onClick={() => atualizaStatusTarefa(false)}>Todas pendentes</button>
     </div>
   );
 };
