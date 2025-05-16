@@ -6,6 +6,7 @@ const App = () => {
   const [tarefas, setTarefas] = React.useState([]);
   const [input, setInput] = React.useState('');
   const inputElement = React.useRef();
+  const [tarefasPendentes, setTarefasPendentes] = React.useState(0);
 
   function adicionarTarefa() {
     const tarefaExistente = tarefas.find(
@@ -20,11 +21,15 @@ const App = () => {
   }
 
   function deletarTarefa({ target }) {
-    const nomeTarefaSelecionada = target.parentElement.dataset.nome;
-    const novasTarefas = tarefas.filter(
-      (tarefa) => tarefa.nome !== nomeTarefaSelecionada
-    );
-    setTarefas(novasTarefas);
+    if (tarefas.length === 1) {
+      removerTodasTarefas();
+    } else {
+      const nomeTarefaSelecionada = target.parentElement.dataset.nome;
+      const novasTarefas = tarefas.filter(
+        (tarefa) => tarefa.nome !== nomeTarefaSelecionada
+      );
+      setTarefas(novasTarefas);
+    }
   }
 
   function removerTodasTarefas() {
@@ -60,6 +65,9 @@ const App = () => {
     if (tarefas.length) {
       localStorage.setItem('tarefas', JSON.stringify(tarefas));
     }
+
+    const pendentes = tarefas.filter((tarefa) => !tarefa.isConcluida);
+    setTarefasPendentes(pendentes.length);
   }, [tarefas]);
 
   React.useEffect(() => {
@@ -91,6 +99,8 @@ const App = () => {
           />
         ))}
       </ul>
+
+      <p>Tarefas pendentes: {tarefasPendentes}</p>
     </div>
   );
 };
