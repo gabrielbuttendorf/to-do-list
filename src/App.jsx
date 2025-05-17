@@ -7,6 +7,8 @@ const App = () => {
   const [input, setInput] = React.useState('');
   const inputElement = React.useRef();
   const [tarefasPendentes, setTarefasPendentes] = React.useState(0);
+  const [tarefasExibir, setTarefasExibir] = React.useState([]);
+  const [filtroAtual, setFiltroAtual] = React.useState('todas');
 
   function adicionarTarefa() {
     const tarefaExistente = tarefas.find(
@@ -70,6 +72,10 @@ const App = () => {
     setTarefas(novasTarefas);
   }
 
+  function filtrarTarefas({ target }) {
+    setFiltroAtual(target.value);
+  }
+
   React.useEffect(() => {
     if (tarefas.length) {
       localStorage.setItem('tarefas', JSON.stringify(tarefas));
@@ -87,6 +93,26 @@ const App = () => {
     }
   }, []);
 
+  React.useEffect(() => {
+    let tarefasFiltradas = [];
+
+    switch (filtroAtual) {
+      case 'concluidas':
+        tarefasFiltradas = tarefas.filter((tarefa) => tarefa.isConcluida);
+        break;
+      case 'pendentes':
+        tarefasFiltradas = tarefas.filter(
+          (tarefa) => !tarefa.isConcluida
+        );
+        break;
+      default:
+        tarefasFiltradas = tarefas;
+        break;
+    }
+
+    setTarefasExibir(tarefasFiltradas);
+  }, [tarefas, filtroAtual]);
+
   return (
     <div>
       <FormularioTarefa
@@ -98,8 +124,14 @@ const App = () => {
         onRemover={removerTodasTarefas}
       />
 
+      <select onChange={filtrarTarefas}>
+        <option value="todas">Todas</option>
+        <option value="concluidas">Concluídas</option>
+        <option value="pendentes">Pendentes</option>
+      </select>
+
       <ul>
-        {tarefas.map((tarefa) => (
+        {tarefasExibir.map((tarefa) => (
           <TarefaItem
             key={tarefa.nome}
             tarefa={tarefa}
@@ -110,8 +142,12 @@ const App = () => {
       </ul>
 
       <p>Tarefas pendentes: {tarefasPendentes}</p>
-      <button onClick={() => atualizaStatusTarefa(true)}>Todas concluídas</button>
-      <button onClick={() => atualizaStatusTarefa(false)}>Todas pendentes</button>
+      <button onClick={() => atualizaStatusTarefa(true)}>
+        Todas concluídas
+      </button>
+      <button onClick={() => atualizaStatusTarefa(false)}>
+        Todas pendentes
+      </button>
     </div>
   );
 };
