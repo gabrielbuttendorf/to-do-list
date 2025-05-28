@@ -1,6 +1,10 @@
 import React from 'react';
-import TarefaItem from './TarefaItem';
-import FormularioTarefa from './FormularioTarefa';
+import TarefaItem from './components/TarefaItem';
+import FormularioTarefa from './components/FormularioTarefa';
+import { MagnifyingGlassIcon } from '@phosphor-icons/react';
+
+import './global.css';
+import styles from './App.module.css';
 
 const App = () => {
   const [tarefas, setTarefas] = React.useState([]);
@@ -101,9 +105,7 @@ const App = () => {
         tarefasFiltradas = tarefas.filter((tarefa) => tarefa.isConcluida);
         break;
       case 'pendentes':
-        tarefasFiltradas = tarefas.filter(
-          (tarefa) => !tarefa.isConcluida
-        );
+        tarefasFiltradas = tarefas.filter((tarefa) => !tarefa.isConcluida);
         break;
       default:
         tarefasFiltradas = tarefas;
@@ -114,7 +116,24 @@ const App = () => {
   }, [tarefas, filtroAtual]);
 
   return (
-    <div>
+    <main>
+      <h1 className={styles.title}>To Do List</h1>
+      <div className={styles.searchWrapper}>
+        <div className={styles.search}>
+          <MagnifyingGlassIcon
+            size={21}
+            className={styles.searchIcon}
+            color="#2976CD"
+          />
+          <input type="text" placeholder="Pesquisar tarefa..." />
+        </div>
+        <select onChange={filtrarTarefas}>
+          <option value="todas">Todas</option>
+          <option value="concluidas">Concluídas</option>
+          <option value="pendentes">Pendentes</option>
+        </select>
+      </div>
+
       <FormularioTarefa
         input={input}
         inputRef={inputElement}
@@ -123,12 +142,6 @@ const App = () => {
         onAdicionar={adicionarTarefa}
         onRemover={removerTodasTarefas}
       />
-
-      <select onChange={filtrarTarefas}>
-        <option value="todas">Todas</option>
-        <option value="concluidas">Concluídas</option>
-        <option value="pendentes">Pendentes</option>
-      </select>
 
       <ul>
         {tarefasExibir.map((tarefa) => (
@@ -148,7 +161,7 @@ const App = () => {
       <button onClick={() => atualizaStatusTarefa(false)}>
         Todas pendentes
       </button>
-    </div>
+    </main>
   );
 };
 

@@ -1,0 +1,30 @@
+:root {
+  --white: #FFF;
+  --black: #252525;
+  --blue-100: #D6E6F9;
+  --blue-200: #B0CFF4;
+  --blue-300: #8AB8EF;
+  --blue-400: #64A1EA;
+  --blue-500: #3E8AE5;
+  --blue-600: #2976CD; /* cor base */
+  --blue-700: #2161A7;
+  --blue-800: #194C81;
+  --blue-900: #12365B;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body, input, textarea, button {
+  font-family: 'Kanit', sans-serif;
+  font-weight: 300;
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+:focus {
+  outline: none;
+}
