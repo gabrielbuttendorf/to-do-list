@@ -134,16 +134,7 @@ const App = () => {
         </select>
       </div>
 
-      <FormularioTarefa
-        input={input}
-        inputRef={inputElement}
-        onChange={handleChange}
-        onEnter={handlePressEnter}
-        onAdicionar={adicionarTarefa}
-        onRemover={removerTodasTarefas}
-      />
-
-      <ul>
+      <ul className={styles.tarefaItemWrapper}>
         {tarefasExibir.map((tarefa) => (
           <TarefaItem
             key={tarefa.nome}
@@ -154,13 +145,22 @@ const App = () => {
         ))}
       </ul>
 
+      <FormularioTarefa
+        input={input}
+        inputRef={inputElement}
+        onChange={handleChange}
+        onEnter={handlePressEnter}
+        onAdicionar={adicionarTarefa}
+        onRemover={removerTodasTarefas}
+      />
+{/* 
       <p>Tarefas pendentes: {tarefasPendentes}</p>
       <button onClick={() => atualizaStatusTarefa(true)}>
         Todas concluídas
       </button>
       <button onClick={() => atualizaStatusTarefa(false)}>
         Todas pendentes
-      </button>
+      </button> */}
     </main>
   );
 };

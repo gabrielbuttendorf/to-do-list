@@ -1,0 +1,46 @@
+.tarefaItem {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.tarefaItem + .tarefaItem {
+  border-top: 1px solid var(--blue-200);
+  padding-top: 0.875rem;
+}
+
+.inputLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-transform: uppercase;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+.checkboxAndText input:checked + label {
+  opacity: 0.5;
+}
+
+.tarefaItem input {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.deleteButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--gray-300);
+
+  transition: color .1s;
+}
+
+.deleteButton:hover {
+  color: var(--red);
+}
+
+.deleteButton svg {
+  pointer-events: none;
+}

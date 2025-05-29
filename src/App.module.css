@@ -1,6 +1,8 @@
 main {
   display: grid;
-  justify-content: center;
+  max-width: 46.875rem;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .title {
@@ -19,6 +21,7 @@ main {
 }
 
 .search {
+  display: block;
   position: relative;
 }
 
@@ -54,7 +57,7 @@ main {
 
 .searchWrapper > select {
   border-radius: 6px;
-  background: var(--blue-600);
+  background: var(--blue-500);
   color: var(--white);
   font-size: 0.75rem;
   font-weight: bold;
@@ -62,4 +65,29 @@ main {
   padding: 0.25rem;
   border: none;
   outline: none;
+}
+
+.tarefaItemWrapper {
+  padding: 1rem 2rem;
+  display: grid;
+  gap: 0.875rem;
+}
+
+.modalButton {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  border: none;
+  background: var(--blue-400);
+  cursor: pointer;
+  transition: background .1s, box-shadow .1s;
+
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+}
+
+.modalButton:hover {
+  background: var(--blue-500);
+  box-shadow: 0 0 8px 0 var(--blue-400);
 }
