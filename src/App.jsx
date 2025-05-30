@@ -25,7 +25,7 @@ const App = () => {
       setTarefas([...tarefas, { nome: input, isConcluida: false }]);
       setInput('');
       inputElement.current.focus();
-      setModalAddTarefa(false);
+      fecharModal()
     }
   }
 
@@ -83,6 +83,14 @@ const App = () => {
     setFiltroAtual(target.value);
   }
 
+  function abrirModal() {
+    setModalAddTarefa(true);
+  }
+
+  function fecharModal() {
+    setModalAddTarefa(false);
+  }
+
   React.useEffect(() => {
     if (tarefas.length) {
       localStorage.setItem('tarefas', JSON.stringify(tarefas));
@@ -118,6 +126,10 @@ const App = () => {
     setTarefasExibir(tarefasFiltradas);
   }, [tarefas, filtroAtual]);
 
+  React.useEffect(() => {
+    modalAddTarefa && inputElement.current.focus()
+  }, [modalAddTarefa]);
+
   return (
     <main>
       <h1 className={styles.title}>To Do List</h1>
@@ -137,7 +149,9 @@ const App = () => {
         </select>
       </div>
 
-      <p className={styles.pending}>Tarefas pendentes: <span>{tarefasPendentes}</span></p>
+      <p className={styles.pending}>
+        Tarefas pendentes: <span>{tarefasPendentes}</span>
+      </p>
 
       <ul className={styles.tarefaItemWrapper}>
         {tarefasExibir.map((tarefa) => (
@@ -152,7 +166,7 @@ const App = () => {
 
       <button
         className={styles.modalButton}
-        onClick={() => setModalAddTarefa(true)}
+        onClick={abrirModal}
       >
         <PlusIcon size={24} />
       </button>
@@ -167,14 +181,14 @@ const App = () => {
       <button onClick={removerTodasTarefas}>Remover todas as Tarefas</button> */}
 
       {modalAddTarefa && (
-        <Modal onCancelar={() => setModalAddTarefa(false)}>
+        <Modal onCancelar={fecharModal}>
           <FormularioTarefa
             input={input}
             inputRef={inputElement}
             onChange={handleChange}
             onEnter={handlePressEnter}
             onAdicionar={adicionarTarefa}
-            onCancelar={() => setModalAddTarefa(false)}
+            onCancelar={fecharModal}
           />
         </Modal>
       )}
