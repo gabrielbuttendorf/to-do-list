@@ -137,6 +137,8 @@ const App = () => {
         </select>
       </div>
 
+      <p className={styles.pending}>Tarefas pendentes: <span>{tarefasPendentes}</span></p>
+
       <ul className={styles.tarefaItemWrapper}>
         {tarefasExibir.map((tarefa) => (
           <TarefaItem
@@ -155,8 +157,7 @@ const App = () => {
         <PlusIcon size={24} />
       </button>
 
-      {/* <p>Tarefas pendentes: {tarefasPendentes}</p>
-      <button onClick={() => atualizaStatusTarefa(true)}>
+      {/* <button onClick={() => atualizaStatusTarefa(true)}>
         Todas concluídas
       </button>
       <button onClick={() => atualizaStatusTarefa(false)}>

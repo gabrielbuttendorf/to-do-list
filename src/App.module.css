@@ -57,6 +57,16 @@ main {
   outline: none;
 }
 
+.pending {
+  text-transform: uppercase;
+  font-weight: 400;
+  color: var(--gray-400);
+}
+
+.pending span {
+  color: var(--blue-700);
+}
+
 .tarefaItemWrapper {
   padding: 1rem 2rem;
   display: grid;
