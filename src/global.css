@@ -41,3 +41,37 @@ body, input, textarea, button {
 :focus {
   outline: none;
 }
+
+input {
+  color: var(--blue-500);
+  border: 1px solid var(--blue-500);
+  border-radius: 6px;
+  height: 40px;
+  padding: 0 0.4rem;
+  display: block;
+}
+
+input::placeholder {
+  color: var(--blue-200);
+}
+
+input:focus {
+  box-shadow: 0 0 0 2px var(--blue-100);
+}
+
+button {
+  border: none;
+  border-radius: 8px;
+  background: var(--blue-500);
+  color: var(--white);
+  text-transform: uppercase;
+  font-weight: 400;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+
+  transition: all .1s;
+}
+
+button:hover {
+  background: var(--blue-600);
+}

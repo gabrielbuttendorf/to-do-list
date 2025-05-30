@@ -1,17 +1,21 @@
 import React from 'react';
+import styles from './FormularioTarefa.module.css';
 
-const FormularioTarefa = ({ input, inputRef, onChange, onEnter, onAdicionar, onRemover }) => {
+const FormularioTarefa = ({ input, inputRef, onChange, onEnter, onAdicionar, onCancelar }) => {
   return (
-    <div>
+    <div className={styles.form}>
       <input
         type="text"
         value={input}
         ref={inputRef}
         onChange={onChange}
         onKeyDown={onEnter}
+        placeholder="Digite o nome da tarefa..."
       />
-      <button onClick={onAdicionar}>Adicionar Tarefa</button>
-      <button onClick={onRemover}>Remover todas as Tarefas</button>
+      <div className={styles.buttons}>
+        <button className={styles.cancelar} onClick={onCancelar}>Cancelar</button>
+        <button className={styles.addButton} onClick={onAdicionar}>Adicionar</button>
+      </div>
     </div>
   );
 };

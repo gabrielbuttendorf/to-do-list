@@ -19,7 +19,7 @@ const TarefaItem = ({ tarefa, onCheck, onDeletar }) => {
           onChange={onCheck}
         />
 
-        {tarefa.nome}
+        <span>{tarefa.nome}</span>
       </label>
 
       <button className={styles.deleteButton} onClick={onDeletar}>

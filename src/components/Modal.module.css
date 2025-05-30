@@ -1,0 +1,39 @@
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 100;
+}
+
+.modal {
+  background: var(--white);
+  width: 60%;
+  color: var(--gray-900);
+  border-radius: 16px;
+  text-transform: uppercase;
+  min-width: 26.25rem;
+  max-width: 47.5rem;
+  padding: 1.125rem 1.875rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.modalTitle {
+  text-align: center;
+  font-weight: 500;
+  font-size: 1.5rem;
+}
+
+.modal input {
+  width: 100%;
+}
+
+.onClose {
+}

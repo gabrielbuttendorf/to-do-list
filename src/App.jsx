@@ -1,10 +1,11 @@
 import React from 'react';
 import TarefaItem from './components/TarefaItem';
 import FormularioTarefa from './components/FormularioTarefa';
-import { MagnifyingGlassIcon } from '@phosphor-icons/react';
+import { MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react';
 
 import './global.css';
 import styles from './App.module.css';
+import Modal from './components/Modal';
 
 const App = () => {
   const [tarefas, setTarefas] = React.useState([]);
@@ -13,6 +14,7 @@ const App = () => {
   const [tarefasPendentes, setTarefasPendentes] = React.useState(0);
   const [tarefasExibir, setTarefasExibir] = React.useState([]);
   const [filtroAtual, setFiltroAtual] = React.useState('todas');
+  const [modalAddTarefa, setModalAddTarefa] = React.useState(false);
 
   function adicionarTarefa() {
     const tarefaExistente = tarefas.find(
@@ -145,22 +147,30 @@ const App = () => {
         ))}
       </ul>
 
-      <FormularioTarefa
-        input={input}
-        inputRef={inputElement}
-        onChange={handleChange}
-        onEnter={handlePressEnter}
-        onAdicionar={adicionarTarefa}
-        onRemover={removerTodasTarefas}
-      />
-{/* 
-      <p>Tarefas pendentes: {tarefasPendentes}</p>
+      <button className={styles.modalButton} onClick={() => setModalAddTarefa(true)}>
+        <PlusIcon size={24}/>
+      </button>
+      
+      {/* <p>Tarefas pendentes: {tarefasPendentes}</p>
       <button onClick={() => atualizaStatusTarefa(true)}>
         Todas concluídas
       </button>
       <button onClick={() => atualizaStatusTarefa(false)}>
         Todas pendentes
-      </button> */}
+      </button>
+
+      <button onClick={removerTodasTarefas}>Remover todas as Tarefas</button> */}
+
+      {modalAddTarefa && <Modal>
+        <FormularioTarefa
+          input={input}
+          inputRef={inputElement}
+          onChange={handleChange}
+          onEnter={handlePressEnter}
+          onAdicionar={adicionarTarefa}
+          onCancelar={() => setModalAddTarefa(false)}
+        />
+      </Modal>}
     </main>
   );
 };
