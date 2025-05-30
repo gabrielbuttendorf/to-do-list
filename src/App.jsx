@@ -25,6 +25,7 @@ const App = () => {
       setTarefas([...tarefas, { nome: input, isConcluida: false }]);
       setInput('');
       inputElement.current.focus();
+      setModalAddTarefa(false);
     }
   }
 
@@ -147,10 +148,13 @@ const App = () => {
         ))}
       </ul>
 
-      <button className={styles.modalButton} onClick={() => setModalAddTarefa(true)}>
-        <PlusIcon size={24}/>
+      <button
+        className={styles.modalButton}
+        onClick={() => setModalAddTarefa(true)}
+      >
+        <PlusIcon size={24} />
       </button>
-      
+
       {/* <p>Tarefas pendentes: {tarefasPendentes}</p>
       <button onClick={() => atualizaStatusTarefa(true)}>
         Todas concluídas
@@ -161,16 +165,18 @@ const App = () => {
 
       <button onClick={removerTodasTarefas}>Remover todas as Tarefas</button> */}
 
-      {modalAddTarefa && <Modal>
-        <FormularioTarefa
-          input={input}
-          inputRef={inputElement}
-          onChange={handleChange}
-          onEnter={handlePressEnter}
-          onAdicionar={adicionarTarefa}
-          onCancelar={() => setModalAddTarefa(false)}
-        />
-      </Modal>}
+      {modalAddTarefa && (
+        <Modal>
+          <FormularioTarefa
+            input={input}
+            inputRef={inputElement}
+            onChange={handleChange}
+            onEnter={handlePressEnter}
+            onAdicionar={adicionarTarefa}
+            onCancelar={() => setModalAddTarefa(false)}
+          />
+        </Modal>
+      )}
     </main>
   );
 };

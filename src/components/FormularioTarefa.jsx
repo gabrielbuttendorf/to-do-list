@@ -13,7 +13,7 @@ const FormularioTarefa = ({ input, inputRef, onChange, onEnter, onAdicionar, onC
         placeholder="Digite o nome da tarefa..."
       />
       <div className={styles.buttons}>
-        <button className={styles.cancelar} onClick={onCancelar}>Cancelar</button>
+        <button className={styles.cancelButton} onClick={onCancelar}>Cancelar</button>
         <button className={styles.addButton} onClick={onAdicionar}>Adicionar</button>
       </div>
     </div>

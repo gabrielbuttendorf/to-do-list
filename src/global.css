@@ -71,7 +71,3 @@ button {
 
   transition: all .1s;
 }
-
-button:hover {
-  background: var(--blue-600);
-}
