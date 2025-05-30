@@ -38,7 +38,8 @@
   transition: color .1s;
 }
 
-.deleteButton:hover {
+.deleteButton:hover,
+.deleteButton:focus {
   color: var(--red);
 }
 

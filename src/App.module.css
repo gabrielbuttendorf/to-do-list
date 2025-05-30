@@ -74,7 +74,8 @@ main {
   bottom: 2rem;
 }
 
-.modalButton:hover {
+.modalButton:hover,
+.modalButton:focus {
   background: var(--blue-600);
   box-shadow: 0 0 8px 0 var(--blue-400);
 }
