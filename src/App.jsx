@@ -166,7 +166,7 @@ const App = () => {
       <button onClick={removerTodasTarefas}>Remover todas as Tarefas</button> */}
 
       {modalAddTarefa && (
-        <Modal>
+        <Modal onCancelar={() => setModalAddTarefa(false)}>
           <FormularioTarefa
             input={input}
             inputRef={inputElement}
