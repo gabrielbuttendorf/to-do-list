@@ -73,10 +73,12 @@ const App = () => {
     setTarefas(novasTarefas);
   }
 
-  function atualizaStatusTarefa(statusNovo) {
+  function atualizaStatusTarefa(event) {
+    console.log(!tarefas.length);
+    const novoStatus = event.target.checked;
     const novasTarefas = tarefas.map((tarefa) => ({
       ...tarefa,
-      isConcluida: statusNovo,
+      isConcluida: novoStatus,
     }));
 
     setTarefas(novasTarefas);
@@ -160,9 +162,18 @@ const App = () => {
         </select>
       </div>
 
-      <p className={styles.pending}>
-        Tarefas pendentes: <span>{tarefasPendentes}</span>
-      </p>
+      <div className={styles.taskHeader}>
+        <p className={styles.pending}>
+          Tarefas pendentes: <span>{tarefasPendentes}</span>
+        </p>
+        {tarefas.length > 0 && (
+          <label className={styles.selectAll}>
+            <input type="checkbox" onChange={atualizaStatusTarefa} />
+
+            <span>Selecionar tudo</span>
+          </label>
+        )}
+      </div>
 
       <ul className={styles.tarefaItemWrapper}>
         {tarefasExibir.map((tarefa) => (
@@ -174,13 +185,6 @@ const App = () => {
           />
         ))}
       </ul>
-
-      {/* <button onClick={() => atualizaStatusTarefa(true)}>
-        Todas concluídas
-      </button>
-      <button onClick={() => atualizaStatusTarefa(false)}>
-        Todas pendentes
-      </button> */}
 
       <div className={styles.buttons}>
         <button
