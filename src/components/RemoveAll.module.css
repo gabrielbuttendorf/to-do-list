@@ -1,0 +1,34 @@
+.wrapper p {
+  text-align: center;
+  font-weight: 300;
+  margin-bottom: 2rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.acceptButton {
+  background: transparent;
+  color: var(--red);
+  border: 1px solid var(--red);
+}
+
+.acceptButton:hover,
+.acceptButton:focus {
+  background: var(--red);
+  color: var(--white);
+}
+
+.cancelButton {
+  background: transparent;
+  border: 1px solid var(--blue-500);
+  color: var(--blue-500);
+}
+
+.cancelButton:hover,
+.cancelButton:focus {
+  background: var(--blue-500);
+  color: var(--white);
+}

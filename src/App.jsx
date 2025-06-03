@@ -6,6 +6,7 @@ import { MagnifyingGlassIcon, PlusIcon } from '@phosphor-icons/react';
 import './global.css';
 import styles from './App.module.css';
 import Modal from './components/Modal';
+import RemoveAll from './components/RemoveAll';
 
 const App = () => {
   const [tarefas, setTarefas] = React.useState([]);
@@ -15,6 +16,7 @@ const App = () => {
   const [tarefasExibir, setTarefasExibir] = React.useState([]);
   const [filtroAtual, setFiltroAtual] = React.useState('todas');
   const [modalAddTarefa, setModalAddTarefa] = React.useState(false);
+  const [modalRemoveAll, setModalRemoveAll] = React.useState(false);
 
   function adicionarTarefa() {
     const tarefaExistente = tarefas.find(
@@ -25,7 +27,7 @@ const App = () => {
       setTarefas([...tarefas, { nome: input, isConcluida: false }]);
       setInput('');
       inputElement.current.focus();
-      fecharModal()
+      fecharModal('add');
     }
   }
 
@@ -44,6 +46,7 @@ const App = () => {
   function removerTodasTarefas() {
     setTarefas([]);
     localStorage.removeItem('tarefas');
+    fecharModal('remove');
   }
 
   function handlePressEnter({ key }) {
@@ -83,12 +86,20 @@ const App = () => {
     setFiltroAtual(target.value);
   }
 
-  function abrirModal() {
-    setModalAddTarefa(true);
+  function abrirModal(modal) {
+    if (modal === 'add') {
+      setModalAddTarefa(true);
+    } else if (modal === 'remove') {
+      setModalRemoveAll(true);
+    }
   }
 
-  function fecharModal() {
-    setModalAddTarefa(false);
+  function fecharModal(modal) {
+    if (modal === 'add') {
+      setModalAddTarefa(false);
+    } else if (modal === 'remove') {
+      setModalRemoveAll(false);
+    }
   }
 
   React.useEffect(() => {
@@ -127,7 +138,7 @@ const App = () => {
   }, [tarefas, filtroAtual]);
 
   React.useEffect(() => {
-    modalAddTarefa && inputElement.current.focus()
+    modalAddTarefa && inputElement.current.focus();
   }, [modalAddTarefa]);
 
   return (
@@ -164,31 +175,44 @@ const App = () => {
         ))}
       </ul>
 
-      <button
-        className={styles.modalButton}
-        onClick={abrirModal}
-      >
-        <PlusIcon size={24} />
-      </button>
-
       {/* <button onClick={() => atualizaStatusTarefa(true)}>
         Todas concluídas
       </button>
       <button onClick={() => atualizaStatusTarefa(false)}>
         Todas pendentes
-      </button>
+      </button> */}
 
-      <button onClick={removerTodasTarefas}>Remover todas as Tarefas</button> */}
+      <div className={styles.buttons}>
+        <button
+          className={styles.removeAllButton}
+          onClick={() => abrirModal('remove')}
+        >
+          Remover todas as Tarefas
+        </button>
+
+        <button className={styles.addButton} onClick={() => abrirModal('add')}>
+          <PlusIcon size={24} />
+        </button>
+      </div>
 
       {modalAddTarefa && (
-        <Modal onCancelar={fecharModal}>
+        <Modal onCancelar={() => fecharModal('add')} title="Adicionar tarefa">
           <FormularioTarefa
             input={input}
             inputRef={inputElement}
             onChange={handleChange}
             onEnter={handlePressEnter}
             onAdicionar={adicionarTarefa}
-            onCancelar={fecharModal}
+            onCancelar={() => fecharModal('add')}
+          />
+        </Modal>
+      )}
+
+      {modalRemoveAll && (
+        <Modal onCancelar={() => fecharModal('remove')} title="Remover tudo">
+          <RemoveAll
+            onAceitar={removerTodasTarefas}
+            onCancelar={() => fecharModal('remove')}
           />
         </Modal>
       )}

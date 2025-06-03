@@ -73,26 +73,42 @@ main {
   gap: 0.875rem;
 }
 
-.modalButton {
+.buttons {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.addButton {
   position: relative;
   width: 3rem;
   height: 3rem;
   border-radius: 50%;
-
-  position: fixed;
-  right: 2rem;
-  bottom: 2rem;
 }
 
-.modalButton:hover,
-.modalButton:focus {
+.addButton:hover,
+.addButton:focus {
   background: var(--blue-600);
   box-shadow: 0 0 8px 0 var(--blue-400);
 }
 
-.modalButton svg {
+.addButton svg {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+.removeAllButton {
+  background: transparent;
+  border: 1px solid var(--red);
+  color: var(--red);
+}
+
+.removeAllButton:hover,
+.removeAllButton:focus {
+  background: var(--red);
+  color: var(--white);
 }

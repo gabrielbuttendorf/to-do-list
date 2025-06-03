@@ -1,14 +1,14 @@
 import React from 'react';
 import styles from './Modal.module.css';
 
-const Modal = ({ children, onCancelar }) => {
+const Modal = ({ title, children, onCancelar }) => {
   return (
     <div className={styles.overlay} onClick={onCancelar}>
       <div
         className={styles.modal}
         onClick={(event) => event.stopPropagation()}
       >
-        <span className={styles.modalTitle}>Adicionar tarefa</span>
+        <span className={styles.modalTitle}>{title}</span>
         {children}
       </div>
     </div>
