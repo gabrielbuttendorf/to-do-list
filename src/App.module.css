@@ -40,7 +40,6 @@ main {
   transform: translateY(-50%);
 }
 
-.searchIcon:hover,
 .searchWrapper > select {
   cursor: pointer;
 }

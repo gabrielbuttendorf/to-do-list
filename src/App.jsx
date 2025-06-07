@@ -17,6 +17,7 @@ const App = () => {
   const [filtroAtual, setFiltroAtual] = React.useState('todas');
   const [modalAddTarefa, setModalAddTarefa] = React.useState(false);
   const [modalRemoveAll, setModalRemoveAll] = React.useState(false);
+  const [search, setSearch] = React.useState('');
 
   function adicionarTarefa() {
     const tarefaExistente = tarefas.find(
@@ -136,8 +137,14 @@ const App = () => {
         break;
     }
 
+    if (search.trim() !== '') {
+      tarefasFiltradas = tarefasFiltradas.filter((tarefa) =>
+        tarefa.nome.toLowerCase().includes(search.toLowerCase())
+      );
+    }
+
     setTarefasExibir(tarefasFiltradas);
-  }, [tarefas, filtroAtual]);
+  }, [tarefas, filtroAtual, search]);
 
   React.useEffect(() => {
     modalAddTarefa && inputElement.current.focus();
@@ -153,7 +160,12 @@ const App = () => {
             className={styles.searchIcon}
             color="#2976CD"
           />
-          <input type="text" placeholder="Pesquisar tarefa..." />
+          <input
+            type="text"
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            placeholder="Pesquisar tarefa..."
+          />
         </div>
         <select onChange={filtrarTarefas}>
           <option value="todas">Todas</option>
