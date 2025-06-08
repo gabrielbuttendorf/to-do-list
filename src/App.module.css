@@ -97,6 +97,7 @@ main {
   right: 2rem;
   bottom: 2rem;
   display: flex;
+  padding-left: 2rem;
   gap: 1rem;
 }
 
