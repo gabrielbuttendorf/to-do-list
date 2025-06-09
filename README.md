@@ -7,11 +7,16 @@ Uma aplicação simples de lista de tarefas desenvolvida com React e Vite.
 - Adicionar tarefas à lista.
 - Marcar tarefas como concluídas.
 - Remover tarefas da lista.
-- Interface limpa e responsiva.
 - Pesquisar tarefas adicionadas.
+- Armazenamento das tarefas no localStorage
+- Filtro para visualizar tarefas concluídas, pendentes ou todas
+- Interface responsiva, adaptada para dispositivos móveis
 
 ## 🚀 Tecnologias Utilizadas
 
 - React
 - Vite
 - ESLint
+
+
+![Imagem da To-Do List](./assets/screenshot.png)
