@@ -19,4 +19,5 @@ Uma aplicação simples de lista de tarefas desenvolvida com React e Vite.
 - ESLint
 
 
-![Imagem da To-Do List](./assets/screenshot.png)
+<img src="./assets/screenshot.png" alt="Imagem da To-Do List" width="400"/>
+
